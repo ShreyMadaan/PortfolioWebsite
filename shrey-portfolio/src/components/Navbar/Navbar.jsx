@@ -39,7 +39,7 @@ function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden items-center gap-7 xl:flex">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -52,7 +52,7 @@ function Navbar() {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden items-center gap-5 md:flex">
+          <div className="hidden items-center gap-5 xl:flex">
             <a
               href="#contact"
               className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
@@ -72,7 +72,7 @@ function Navbar() {
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="rounded-md p-2 text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-zinc-100 md:hidden"
+            className="rounded-md p-2 text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-zinc-100 xl:hidden"
             aria-label={
               isMenuOpen ? "Close navigation menu" : "Open navigation menu"
             }
@@ -114,7 +114,7 @@ function Navbar() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="border-t border-zinc-800 py-5 md:hidden">
+          <div className="border-t border-zinc-800 py-5 xl:hidden">
             <div className="flex flex-col">
               {navLinks.map((link) => (
                 <a

@@ -1,9 +1,26 @@
 import skillData from "./skillData";
+import skillsBg from "../../assets/images/skills-bg.png";
 
 function Skills() {
   return (
-    <section id="skills" className="border-t border-zinc-900 py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+  id="skills"
+  className="relative overflow-hidden border-t border-zinc-900 py-24"
+>
+  {/* Skills Background */}
+<div
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: `url(${skillsBg})` }}
+/>
+
+{/* Dark Overlay */}
+<div className="absolute inset-0 bg-black/80" />
+
+{/* Section Blending */}
+<div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
+<div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-12">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
             Skills

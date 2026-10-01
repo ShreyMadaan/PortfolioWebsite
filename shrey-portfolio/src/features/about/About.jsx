@@ -1,7 +1,26 @@
+import aboutBg from "../../assets/images/about-bg.png";
+
+
 function About() {
   return (
-    <section id="about" className="border-t border-zinc-900 py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="about"
+      className="relative overflow-hidden border-t border-zinc-900 py-24"
+    >
+      {/* About Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${aboutBg})` }}
+      />
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/80" />
+
+      {/* Top + Bottom Blending */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
@@ -58,6 +77,7 @@ function About() {
           </div>
         </div>
       </div>
+
     </section>
   );
 }

@@ -1,12 +1,27 @@
+import experienceBg from "../../assets/images/experience-bg.png";
+
 import experienceData from "./experienceData";
 
 function Experience() {
   return (
     <section
-      id="experience"
-      className="border-t border-zinc-900 py-24"
-    >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+  id="experience"
+  className="relative overflow-hidden border-t border-zinc-900 py-24"
+>
+ {/* Experience Background */}
+<div
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: `url(${experienceBg})` }}
+/>
+
+{/* Dark Overlay */}
+<div className="absolute inset-0 bg-black/80" />
+
+{/* Section Blending */}
+<div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
+<div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-12">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
             Experience

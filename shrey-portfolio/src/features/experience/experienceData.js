@@ -38,14 +38,14 @@ const experienceData = [
   },
   {
     period: "2021 — 2023",
-    title: "Member",
-    organization: "Navras — Cultural Society",
-    description: "",
+    title: "Cultural Society — Navras",
+    organization: "JIMS Engineering Management Technical Campus",
+    description: "Member",
   },
   {
     period: "2020 — 2024",
     title: "Student Sports Coordinator",
-    organization: "JIMS Engineering Management Technical Campus, Greater Noida",
+    organization: "JIMS Engineering Management Technical Campus",
     description: "",
     progression: "Appointed Student Sports Coordinator → Elected Sports Head for JIMS",
   },
