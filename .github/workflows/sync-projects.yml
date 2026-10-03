@@ -1,11 +1,14 @@
 name: Sync Portfolio Projects
 
 on:
+  # Allows manual execution from the GitHub Actions tab
   workflow_dispatch:
 
+  # Automatically checks for project updates every 6 hours
   schedule:
     - cron: "0 */6 * * *"
 
+# Required so GitHub Actions can commit the updated projects.json
 permissions:
   contents: write
 
@@ -14,18 +17,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Download the Portfolio repository onto the GitHub runner
       - name: Checkout portfolio repository
         uses: actions/checkout@v4
 
+      # 2. Install Node.js on the runner
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
+      # 3. Run our GitHub project synchronization script
       - name: Sync projects from GitHub
         working-directory: ./shrey-portfolio
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run sync:projects
 
+      # 4. Check whether projects.json actually changed
       - name: Check for project changes
         id: changes
         run: |
@@ -35,6 +44,7 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      # 5. Commit and push only when project data changed
       - name: Commit updated projects
         if: steps.changes.outputs.changed == 'true'
         run: |

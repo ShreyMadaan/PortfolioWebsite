@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const GITHUB_USERNAME = "ShreyMadaan";
+const githubToken = process.env.GITHUB_TOKEN;
 
 const API_URL =
     `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&type=owner`;
@@ -115,6 +116,9 @@ async function syncProjects() {
         const response = await fetch(API_URL, {
             headers: {
                 Accept: "application/vnd.github+json",
+                ...(githubToken && {
+                    Authorization: `Bearer ${githubToken}`,
+                }),
             },
         });
 
