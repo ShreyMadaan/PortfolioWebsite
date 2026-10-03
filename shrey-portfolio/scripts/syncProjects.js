@@ -22,26 +22,38 @@ const OUTPUT_FILE = path.join(
 // ==============================
 
 const technologyMap = {
-    java: "Java",
-    javascript: "JavaScript",
-    typescript: "TypeScript",
-    react: "React",
-    redux: "Redux",
-    "redux-toolkit": "Redux Toolkit",
-    "spring-boot": "Spring Boot",
-    spring: "Spring",
-    mysql: "MySQL",
-    sql: "SQL",
-    mongodb: "MongoDB",
-    docker: "Docker",
-    html: "HTML",
-    css: "CSS",
-    tailwind: "Tailwind CSS",
-    vite: "Vite",
-    "node-js": "Node.js",
-    express: "Express",
-    "tmdb-api": "TMDB API",
-    ai: "AI",
+  java: "Java",
+  javascript: "JavaScript",
+  typescript: "TypeScript",
+
+  react: "React",
+  redux: "Redux",
+  "redux-toolkit": "Redux Toolkit",
+
+  "spring-boot": "Spring Boot",
+  spring: "Spring",
+
+  mysql: "MySQL",
+  sql: "SQL",
+  mongodb: "MongoDB",
+
+  html: "HTML",
+  css: "CSS",
+  tailwind: "Tailwind CSS",
+
+  vite: "Vite",
+  maven: "Maven",
+  docker: "Docker",
+
+  "node-js": "Node.js",
+  nodejs: "Node.js",
+  express: "Express",
+
+  "tmdb-api": "TMDB API",
+  ai: "AI",
+
+  dsa: "DSA",
+  cli: "CLI",
 };
 
 

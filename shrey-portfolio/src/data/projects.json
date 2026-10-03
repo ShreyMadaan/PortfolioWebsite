@@ -7,7 +7,10 @@
       "Java"
     ],
     "technologies": [
-      "Java"
+      "Java",
+      "CLI",
+      "DSA",
+      "Maven"
     ],
     "github": "https://github.com/ShreyMadaan/HuffmanCompressor",
     "live": null
