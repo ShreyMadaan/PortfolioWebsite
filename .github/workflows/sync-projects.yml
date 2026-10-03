@@ -1,10 +1,8 @@
 name: Sync Portfolio Projects
 
 on:
-  # Allows us to test the workflow manually from GitHub
   workflow_dispatch:
 
-  # Automatically check GitHub every 6 hours
   schedule:
     - cron: "0 */6 * * *"
 
@@ -25,12 +23,13 @@ jobs:
           node-version: 22
 
       - name: Sync projects from GitHub
+        working-directory: ./shrey-portfolio
         run: npm run sync:projects
 
       - name: Check for project changes
         id: changes
         run: |
-          if git diff --quiet src/data/projects.json; then
+          if git diff --quiet shrey-portfolio/src/data/projects.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -42,6 +41,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add src/data/projects.json
+          git add shrey-portfolio/src/data/projects.json
           git commit -m "chore: sync portfolio projects"
           git push
