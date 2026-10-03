@@ -1,5 +1,5 @@
 import aboutBg from "../../assets/images/about-bg.png";
-
+import Reveal from "../../components/Reveal/Reveal";
 
 function About() {
   return (
@@ -22,15 +22,17 @@ function About() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
-              About
-            </p>
+          <Reveal>
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
+                About
+              </p>
 
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-100">
-              Building with purpose.
-            </h2>
-          </div>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-100">
+                Building with purpose.
+              </h2>
+            </div>
+          </Reveal>
 
           <div className="max-w-3xl space-y-6 text-lg leading-8 text-zinc-400">
             <p>

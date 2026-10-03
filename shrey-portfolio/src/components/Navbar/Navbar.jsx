@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Navbar() {
+function Navbar({ scrollDirection }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -18,8 +18,36 @@ function Navbar() {
     setIsMenuOpen(false);
   };
 
+  const handleScroll = () => {
+  const currentScrollY = window.scrollY;
+  const difference = currentScrollY - previousScrollY;
+
+  if (Math.abs(difference) < 8) {
+    return;
+  }
+
+  if (difference > 0 && currentScrollY > 100) {
+    setScrollDirection("down");
+  } else if (difference < 0) {
+    setScrollDirection("up");
+  }
+
+  previousScrollY = currentScrollY;
+};
+
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950">
+    <header
+      className={`
+    sticky top-0 z-50
+    border-b border-zinc-800/80
+    bg-zinc-950/95 backdrop-blur-md
+    transition-transform duration-500 ease-out
+    ${scrollDirection === "down" && !isMenuOpen
+          ? "-translate-y-full"
+          : "translate-y-0"
+        }
+  `}
+    >
       <nav className="mx-auto max-w-[1600px] px-6 lg:px-10">
         <div className="flex h-20 items-center justify-between">
 

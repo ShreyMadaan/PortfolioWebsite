@@ -1,0 +1,31 @@
+[
+  {
+    "id": "huffmancompressor",
+    "title": "HuffmanCompressor",
+    "description": "A Java-based file compressor and decompressor using Huffman Coding, implemented with Greedy Algorithm, Priority Queue, and Binary Trees — no external libraries required.",
+    "categories": [
+      "Java"
+    ],
+    "technologies": [
+      "Java"
+    ],
+    "github": "https://github.com/ShreyMadaan/HuffmanCompressor",
+    "live": null
+  },
+  {
+    "id": "shreyflixai",
+    "title": "ShreyFlixAI",
+    "description": "Full-stack IMDb-inspired movie platform with movie discovery, ratings, reviews, search, and an AI-powered recommendation system for personalized movie suggestions.",
+    "categories": [
+      "Full Stack"
+    ],
+    "technologies": [
+      "JavaScript",
+      "AI",
+      "React",
+      "TMDB API"
+    ],
+    "github": "https://github.com/ShreyMadaan/ShreyFlixAI",
+    "live": null
+  }
+]

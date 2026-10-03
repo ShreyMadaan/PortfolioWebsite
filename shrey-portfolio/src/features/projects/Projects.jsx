@@ -1,8 +1,10 @@
 import projectsBg from "../../assets/images/projects-bg.png";
 
 import { useEffect, useState } from "react";
-import { projectCategories, projects } from "./projectData";
+import projects from "../../data/projects.json";
+import { projectCategories } from "./projectData";
 import ProjectCard from "./components/ProjectCard";
+import Reveal from "../../components/Reveal/Reveal";
 
 function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -35,8 +37,8 @@ function Projects() {
     activeCategory === "All"
       ? projects
       : projects.filter((project) =>
-          project.categories.includes(activeCategory)
-        );
+        project.categories.includes(activeCategory)
+      );
 
   const maxStartIndex = Math.max(
     filteredProjects.length - projectsPerPage,
@@ -98,24 +100,26 @@ function Projects() {
 
   return (
     <section
-  id="projects"
-  className="relative overflow-hidden border-t border-zinc-900 py-24"
->
- {/* Projects Background */}
-<div
-  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-  style={{ backgroundImage: `url(${projectsBg})` }}
-/>
+      id="projects"
+      className="relative overflow-hidden border-t border-zinc-900 py-24"
+    >
+      {/* Projects Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${projectsBg})` }}
+      />
 
-{/* Dark Overlay */}
-<div className="absolute inset-0 bg-black/80" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/80" />
 
-{/* Section Blending */}
-<div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
-<div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
+      {/* Section Blending */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Heading */}
+        <Reveal>
+
         <div className="mb-12">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
             Projects
@@ -125,6 +129,7 @@ function Projects() {
             Things I&apos;ve built.
           </h2>
         </div>
+        </Reveal>
 
         {/* Category Navigation */}
         <div className="mb-10 flex gap-8 overflow-x-auto border-b border-zinc-800">
@@ -133,11 +138,10 @@ function Projects() {
               key={category}
               type="button"
               onClick={() => handleCategoryChange(category)}
-              className={`shrink-0 pb-4 text-sm font-medium transition-colors ${
-                activeCategory === category
+              className={`shrink-0 pb-4 text-sm font-medium transition-colors ${activeCategory === category
                   ? "border-b border-zinc-100 text-zinc-100"
                   : "text-zinc-500 hover:text-zinc-300"
-              }`}
+                }`}
             >
               {category}
             </button>

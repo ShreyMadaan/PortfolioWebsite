@@ -1,7 +1,24 @@
+const handleMouseMove = (event) => {
+  const card = event.currentTarget;
+  const rect = card.getBoundingClientRect();
+
+  card.style.setProperty(
+    "--mouse-x",
+    `${event.clientX - rect.left}px`
+  );
+
+  card.style.setProperty(
+    "--mouse-y",
+    `${event.clientY - rect.top}px`
+  );
+};
+
 function ProjectCard({ project }) {
   return (
-    <article className="group overflow-hidden border border-zinc-800 transition-colors hover:border-zinc-700">
-      
+    <article
+      onMouseMove={handleMouseMove}
+      className="project-card group overflow-hidden border border-zinc-800 transition-colors hover:border-zinc-700"
+    >
       {/* Project Image Placeholder */}
       <div className="flex aspect-video items-center justify-center bg-zinc-900">
         <span className="text-sm text-zinc-600">

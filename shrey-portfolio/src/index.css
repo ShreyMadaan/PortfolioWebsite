@@ -200,9 +200,60 @@ a {
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .ambient-orb,
   .ambient-grid {
     transition: none;
     transform: none;
+  }
+
+  .project-card::before {
+    display: none;
+  }
+}
+
+/* =========================
+   PROJECT CARD SPOTLIGHT
+========================= */
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background: radial-gradient(
+    350px circle at var(--mouse-x) var(--mouse-y),
+    rgb(255 255 255 / 0.06),
+    transparent 45%
+  );
+
+  transition: opacity 300ms ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: none) {
+  .project-card::before {
+    display: none;
   }
 }

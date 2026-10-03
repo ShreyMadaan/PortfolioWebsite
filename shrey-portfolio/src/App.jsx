@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar scrollDirection={scrollDirection} />
 
       <AmbientBackground />
 

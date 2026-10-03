@@ -1,5 +1,5 @@
 import certificationsBg from "../../assets/images/certifications-bg.png";
-
+import Reveal from "../../components/Reveal/Reveal";
 import { useState } from "react";
 import certificationCategories from "./certificationData";
 import CertificationCard from "./components/CertificationCard";
@@ -15,8 +15,8 @@ function Certifications() {
     activeSubject === "All"
       ? currentCategory.certificates
       : currentCategory.certificates.filter(
-          (certificate) => certificate.subject === activeSubject
-        );
+        (certificate) => certificate.subject === activeSubject
+      );
 
   const handleCategoryChange = (index) => {
     if (index === activeCategory) {
@@ -45,20 +45,21 @@ function Certifications() {
       className="relative overflow-hidden border-t border-zinc-900 py-24"
     >
       {/* Certifications Background */}
-<div
-  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-  style={{ backgroundImage: `url(${certificationsBg})` }}
-/>
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${certificationsBg})` }}
+      />
 
-{/* Dark Overlay */}
-<div className="absolute inset-0 bg-black/80" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/80" />
 
-{/* Section Blending */}
-<div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
-<div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
+      {/* Section Blending */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-zinc-950 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
 
         {/* Section Heading */}
+        <Reveal>
         <div className="mb-12">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
             Certifications
@@ -68,7 +69,7 @@ function Certifications() {
             Credentials & achievements.
           </h2>
         </div>
-
+        </Reveal>
         {/* Primary Categories */}
         <div className="mb-8 flex gap-8 overflow-x-auto border-b border-zinc-800">
           {certificationCategories.map((category, index) => (
@@ -76,11 +77,10 @@ function Certifications() {
               key={category.name}
               type="button"
               onClick={() => handleCategoryChange(index)}
-              className={`shrink-0 pb-4 text-sm font-medium transition-colors ${
-                activeCategory === index
+              className={`shrink-0 pb-4 text-sm font-medium transition-colors ${activeCategory === index
                   ? "border-b border-zinc-100 text-zinc-100"
                   : "text-zinc-500 hover:text-zinc-300"
-              }`}
+                }`}
             >
               {category.name}
             </button>
@@ -95,11 +95,10 @@ function Certifications() {
                 key={subject}
                 type="button"
                 onClick={() => handleSubjectChange(subject)}
-                className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
-                  activeSubject === subject
+                className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${activeSubject === subject
                     ? "border-zinc-500 bg-zinc-800 text-zinc-100"
                     : "border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300"
-                }`}
+                  }`}
               >
                 {subject}
               </button>
