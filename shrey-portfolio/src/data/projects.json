@@ -1,5 +1,19 @@
 [
   {
+    "id": "ai-feedback-service",
+    "title": "ai-feedback-service",
+    "description": "",
+    "categories": [
+      "Backend",
+      "Java"
+    ],
+    "technologies": [
+      "Java"
+    ],
+    "github": "https://github.com/ShreyMadaan/ai-feedback-service",
+    "live": null
+  },
+  {
     "id": "huffmancompressor",
     "title": "HuffmanCompressor",
     "description": "A Java-based file compressor and decompressor using Huffman Coding, implemented with Greedy Algorithm, Priority Queue, and Binary Trees — no external libraries required.",
