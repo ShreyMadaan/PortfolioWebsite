@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import captureProjectPreview from "./captureProjectPreview.js";
+
 
 const GITHUB_USERNAME = "ShreyMadaan";
 const githubToken = process.env.GITHUB_TOKEN;
@@ -22,38 +24,38 @@ const OUTPUT_FILE = path.join(
 // ==============================
 
 const technologyMap = {
-  java: "Java",
-  javascript: "JavaScript",
-  typescript: "TypeScript",
+    java: "Java",
+    javascript: "JavaScript",
+    typescript: "TypeScript",
 
-  react: "React",
-  redux: "Redux",
-  "redux-toolkit": "Redux Toolkit",
+    react: "React",
+    redux: "Redux",
+    "redux-toolkit": "Redux Toolkit",
 
-  "spring-boot": "Spring Boot",
-  spring: "Spring",
+    "spring-boot": "Spring Boot",
+    spring: "Spring",
 
-  mysql: "MySQL",
-  sql: "SQL",
-  mongodb: "MongoDB",
+    mysql: "MySQL",
+    sql: "SQL",
+    mongodb: "MongoDB",
 
-  html: "HTML",
-  css: "CSS",
-  tailwind: "Tailwind CSS",
+    html: "HTML",
+    css: "CSS",
+    tailwind: "Tailwind CSS",
 
-  vite: "Vite",
-  maven: "Maven",
-  docker: "Docker",
+    vite: "Vite",
+    maven: "Maven",
+    docker: "Docker",
 
-  "node-js": "Node.js",
-  nodejs: "Node.js",
-  express: "Express",
+    "node-js": "Node.js",
+    nodejs: "Node.js",
+    express: "Express",
 
-  "tmdb-api": "TMDB API",
-  ai: "AI",
+    "tmdb-api": "TMDB API",
+    ai: "AI",
 
-  dsa: "DSA",
-  cli: "CLI",
+    dsa: "DSA",
+    cli: "CLI",
 };
 
 
@@ -73,7 +75,8 @@ const categoryMap = {
 // TRANSFORM GITHUB REPOSITORY
 // ==============================
 
-function transformRepository(repository) {
+
+async function transformRepository(repository) {
     const technologies = [];
 
     // GitHub automatically detects the primary language
@@ -98,13 +101,88 @@ function transformRepository(repository) {
         .filter((topic) => categoryMap[topic])
         .map((topic) => categoryMap[topic]);
 
+    const projectId = repository.name.toLowerCase();
+
+    let image = null;
+    let imageSource = null;
+
+    // Priority 1: Use a manually provided repository preview.
+    const previewImageUrl =
+        `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repository.name}/${repository.default_branch}/portfolio-preview.png`;
+
+    try {
+        const previewResponse = await fetch(previewImageUrl, {
+            method: "HEAD",
+        });
+
+        if (previewResponse.ok) {
+            image = previewImageUrl;
+            imageSource = "repository";
+        }
+    } catch (error) {
+        console.warn(
+            `Could not check repository preview for ${repository.name}:`,
+            error.message
+        );
+    }
+
+    // Priority 2: Capture the live website if no manual preview exists.
+    if (!image && repository.homepage?.trim()) {
+        const liveURL = repository.homepage.trim();
+
+        try {
+            const parsedURL = new URL(liveURL);
+
+            if (
+                parsedURL.protocol === "https:" ||
+                parsedURL.protocol === "http:"
+            ) {
+                const screenshotFileName = `${projectId}.png`;
+
+                const screenshotPath = path.join(
+                    process.cwd(),
+                    "public",
+                    "generated",
+                    "projects",
+                    screenshotFileName
+                );
+
+                // Reuse an existing screenshot instead of regenerating it.
+                if (fs.existsSync(screenshotPath)) {
+                    console.log(
+                        `Using cached screenshot for ${repository.name}`
+                    );
+
+                    image = `/generated/projects/${screenshotFileName}`;
+                    imageSource = "screenshot";
+                } else {
+                    const capturedPath = await captureProjectPreview(
+                        liveURL,
+                        projectId
+                    );
+
+                    if (capturedPath) {
+                        image = `/generated/projects/${screenshotFileName}`;
+                        imageSource = "screenshot";
+                    }
+                }
+            }
+        } catch (error) {
+            console.warn(
+                `Skipping live preview for ${repository.name}:`,
+                error.message
+            );
+        }
+    }
+
+    // Priority 3: AI-generated preview (future milestone).
+
     return {
-        id: repository.name.toLowerCase(),
+        id: projectId,
 
         title: repository.name,
 
-        description:
-            repository.description || "",
+        description: repository.description || "",
 
         categories,
 
@@ -113,8 +191,13 @@ function transformRepository(repository) {
         github: repository.html_url,
 
         live: repository.homepage || null,
+
+        image,
+
+        imageSource,
     };
 }
+
 
 
 // ==============================
@@ -202,10 +285,11 @@ async function syncProjects() {
         // TRANSFORM DATA
         // ==============================
 
-        const portfolioProjects =
+        const portfolioProjects = await Promise.all(
             portfolioRepositories.map(
                 transformRepository
-            );
+            )
+        );
 
 
         // ==============================

@@ -11,7 +11,9 @@
       "Java"
     ],
     "github": "https://github.com/ShreyMadaan/ai-feedback-service",
-    "live": null
+    "live": null,
+    "image": null,
+    "imageSource": null
   },
   {
     "id": "huffmancompressor",
@@ -27,7 +29,9 @@
       "Maven"
     ],
     "github": "https://github.com/ShreyMadaan/HuffmanCompressor",
-    "live": null
+    "live": null,
+    "image": null,
+    "imageSource": null
   },
   {
     "id": "shreyflixai",
@@ -43,7 +47,9 @@
       "TMDB API"
     ],
     "github": "https://github.com/ShreyMadaan/ShreyFlixAI",
-    "live": null
+    "live": null,
+    "image": null,
+    "imageSource": null
   },
   {
     "id": "throttlefunctionvisualizer",
@@ -58,6 +64,8 @@
       "JavaScript"
     ],
     "github": "https://github.com/ShreyMadaan/ThrottleFunctionVisualizer",
-    "live": null
+    "live": null,
+    "image": null,
+    "imageSource": null
   }
 ]

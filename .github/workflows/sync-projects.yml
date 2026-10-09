@@ -1,14 +1,13 @@
+
 name: Sync Portfolio Projects
 
 on:
-  # Allows manual execution from the GitHub Actions tab
   workflow_dispatch:
 
   # Automatically checks for project updates every 6 hours
   schedule:
     - cron: "0 */6 * * *"
 
-# Required so GitHub Actions can commit the updated projects.json
 permissions:
   contents: write
 
@@ -17,40 +16,57 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Download the Portfolio repository onto the GitHub runner
+      # 1. Checkout the portfolio repository
       - name: Checkout portfolio repository
         uses: actions/checkout@v4
 
-      # 2. Install Node.js on the runner
+      # 2. Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: shrey-portfolio/package-lock.json
 
-      # 3. Run our GitHub project synchronization script
+      # 3. Install project dependencies, including Playwright
+      - name: Install dependencies
+        working-directory: ./shrey-portfolio
+        run: npm ci
+
+      # 4. Install Chromium for screenshot capture
+      - name: Install Playwright Chromium
+        working-directory: ./shrey-portfolio
+        run: npx playwright install --with-deps chromium
+
+      # 5. Synchronize GitHub project metadata and previews
       - name: Sync projects from GitHub
         working-directory: ./shrey-portfolio
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run sync:projects
 
-      # 4. Check whether projects.json actually changed
+      # 6. Stage and detect changes to JSON and screenshots
       - name: Check for project changes
         id: changes
         run: |
-          if git diff --quiet shrey-portfolio/src/data/projects.json; then
+          git add -A -- shrey-portfolio/src/data/projects.json
+
+          if [ -d shrey-portfolio/public/generated/projects ]; then
+            git add -A -- shrey-portfolio/public/generated/projects
+          fi
+
+          if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      # 5. Commit and push only when project data changed
-      - name: Commit updated projects
+      # 7. Commit and push changes only when needed
+      - name: Commit updated projects and previews
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add shrey-portfolio/src/data/projects.json
-          git commit -m "chore: sync portfolio projects"
+          git commit -m "chore: sync portfolio projects and previews"
           git push
