@@ -64,8 +64,8 @@
       "JavaScript"
     ],
     "github": "https://github.com/ShreyMadaan/ThrottleFunctionVisualizer",
-    "live": null,
-    "image": null,
-    "imageSource": null
+    "live": "https://throttlefunctionvisualizer.netlify.app/",
+    "image": "/generated/projects/throttlefunctionvisualizer.png",
+    "imageSource": "screenshot"
   }
 ]
