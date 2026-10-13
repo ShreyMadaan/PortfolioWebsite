@@ -16,6 +16,21 @@
     "imageSource": null
   },
   {
+    "id": "debouncingfunctionvisualizer",
+    "title": "DebouncingFunctionVisualizer",
+    "description": "A simple interactive front-end project that demonstrates how a debouncing function works in JavaScript. It lets users click a button repeatedly and visually shows that the actual callback is executed after 500ms of inactivity..",
+    "categories": [],
+    "technologies": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "github": "https://github.com/ShreyMadaan/DebouncingFunctionVisualizer",
+    "live": "https://debouncefunctionvisualizer.netlify.app/",
+    "image": "/generated/projects/debouncingfunctionvisualizer.png",
+    "imageSource": "screenshot"
+  },
+  {
     "id": "huffmancompressor",
     "title": "HuffmanCompressor",
     "description": "A Java-based file compressor and decompressor using Huffman Coding, implemented with Greedy Algorithm, Priority Queue, and Binary Trees — no external libraries required.",
