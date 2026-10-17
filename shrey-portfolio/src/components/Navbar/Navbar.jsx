@@ -1,7 +1,9 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 
 function Navbar({ scrollDirection }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -14,43 +16,47 @@ function Navbar({ scrollDirection }) {
     { name: "BeyondCode", href: "#beyond-code" },
   ];
 
+  // Track whether the visitor has scrolled beyond the navbar area.
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      setHasScrolled(window.scrollY > 100);
+    };
+
+    checkScrollPosition();
+
+    window.addEventListener("scroll", checkScrollPosition, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, []);
+
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
-  const handleScroll = () => {
-  const currentScrollY = window.scrollY;
-  const difference = currentScrollY - previousScrollY;
-
-  if (Math.abs(difference) < 8) {
-    return;
-  }
-
-  if (difference > 0 && currentScrollY > 100) {
-    setScrollDirection("down");
-  } else if (difference < 0) {
-    setScrollDirection("up");
-  }
-
-  previousScrollY = currentScrollY;
-};
+  // Always show navbar near the top or when the mobile menu is open.
+  const shouldHideNavbar =
+    hasScrolled && scrollDirection === "down" && !isMenuOpen;
 
   return (
     <header
       className={`
-    sticky top-0 z-50
-    border-b border-zinc-800/80
-    bg-zinc-950/95 backdrop-blur-md
-    transition-transform duration-500 ease-out
-    ${scrollDirection === "down" && !isMenuOpen
-          ? "-translate-y-full"
-          : "translate-y-0"
+        sticky top-0 z-50
+        border-b border-zinc-800/80
+        bg-zinc-950/95 backdrop-blur-md
+        transition-transform duration-500 ease-out
+        ${
+          shouldHideNavbar
+            ? "-translate-y-full"
+            : "translate-y-0"
         }
-  `}
+      `}
     >
       <nav className="mx-auto max-w-[1600px] px-6 lg:px-10">
         <div className="flex h-20 items-center justify-between">
-
           {/* Logo */}
           <a
             href="#home"
@@ -90,6 +96,8 @@ function Navbar({ scrollDirection }) {
 
             <a
               href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
             >
               Resume ↗
@@ -99,12 +107,15 @@ function Navbar({ scrollDirection }) {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
             className="rounded-md p-2 text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-zinc-100 xl:hidden"
             aria-label={
-              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+              isMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
             }
             aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMenuOpen ? (
               <svg
@@ -114,6 +125,7 @@ function Navbar({ scrollDirection }) {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="h-6 w-6"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -129,6 +141,7 @@ function Navbar({ scrollDirection }) {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="h-6 w-6"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -142,7 +155,10 @@ function Navbar({ scrollDirection }) {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="border-t border-zinc-800 py-5 xl:hidden">
+          <div
+            id="mobile-navigation"
+            className="border-t border-zinc-800 py-5 xl:hidden"
+          >
             <div className="flex flex-col">
               {navLinks.map((link) => (
                 <a
@@ -165,6 +181,9 @@ function Navbar({ scrollDirection }) {
 
               <a
                 href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
                 className="mt-4 inline-flex w-fit rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
               >
                 Resume ↗
