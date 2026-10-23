@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import captureProjectPreview from "./captureProjectPreview.js";
-
+import { generateTechnicalPreview } from "./generateTechnicalPreview.js";
 
 const GITHUB_USERNAME = "ShreyMadaan";
 const githubToken = process.env.GITHUB_TOKEN;
@@ -175,7 +175,17 @@ async function transformRepository(repository) {
         }
     }
 
-    // Priority 3: AI-generated preview (future milestone).
+    // Priority 3: AI-generated preview
+    if (!image && repository.name.toLowerCase() === "huffmancompressor") {
+        const previewPath = await generateTechnicalPreview(
+            "huffmancompressor"
+        );
+
+        if (previewPath) {
+            image = "/generated/projects/huffmancompressor.svg";
+            imageSource = "technical";
+        }
+    }
 
     return {
         id: projectId,
