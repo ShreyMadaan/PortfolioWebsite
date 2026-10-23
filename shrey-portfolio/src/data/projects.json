@@ -1,21 +1,5 @@
 [
   {
-    "id": "ai-feedback-service",
-    "title": "ai-feedback-service",
-    "description": "",
-    "categories": [
-      "Backend",
-      "Java"
-    ],
-    "technologies": [
-      "Java"
-    ],
-    "github": "https://github.com/ShreyMadaan/ai-feedback-service",
-    "live": null,
-    "image": null,
-    "imageSource": null
-  },
-  {
     "id": "debouncingfunctionvisualizer",
     "title": "DebouncingFunctionVisualizer",
     "description": "A simple interactive front-end project that demonstrates how a debouncing function works in JavaScript. It lets users click a button repeatedly and visually shows that the actual callback is executed after 500ms of inactivity..",
@@ -45,8 +29,28 @@
     ],
     "github": "https://github.com/ShreyMadaan/HuffmanCompressor",
     "live": null,
-    "image": null,
-    "imageSource": null
+    "image": "/generated/projects/huffmancompressor.svg",
+    "imageSource": "technical"
+  },
+  {
+    "id": "metromindai",
+    "title": "MetroMindAI",
+    "description": "",
+    "categories": [],
+    "technologies": [
+      "JavaScript",
+      "AI",
+      "CSS",
+      "Express",
+      "HTML",
+      "MongoDB",
+      "Node.js",
+      "React"
+    ],
+    "github": "https://github.com/ShreyMadaan/MetroMindAI",
+    "live": "https://metro-mind-ai-orpin.vercel.app",
+    "image": "/generated/projects/metromindai.png",
+    "imageSource": "screenshot"
   },
   {
     "id": "shreyflixai",
@@ -62,9 +66,9 @@
       "TMDB API"
     ],
     "github": "https://github.com/ShreyMadaan/ShreyFlixAI",
-    "live": null,
-    "image": null,
-    "imageSource": null
+    "live": "https://shrey-flix-ai.vercel.app",
+    "image": "/generated/projects/shreyflixai.png",
+    "imageSource": "screenshot"
   },
   {
     "id": "throttlefunctionvisualizer",
