@@ -7,7 +7,7 @@ const educationData = [
     type: "Degree",
     actions: [
       {
-        label: "View Degree ↗",
+        label: "View Degree",
         url: "#",
       },
     ],
@@ -20,7 +20,7 @@ const educationData = [
     type: "Professional Program",
     actions: [
       {
-        label: "View Certificates ↗",
+        label: "View Certificates",
         url: "#",
       },
     ],
@@ -34,8 +34,8 @@ const educationData = [
     type: "Degree",
     actions: [
       {
-        label: "View Degree ↗",
-        url: "#",
+        label: "View Degree",
+        url: "/documents/education/btech-degree.pdf",
       },
     ],
   },
@@ -53,12 +53,12 @@ const educationData = [
     ],
     actions: [
       {
-        label: "View Class 10 Certificate ↗",
-        url: "#",
+        label: "View Class 10 Certificate",
+        url: "/documents/education/class-10-certificate.pdf",
       },
       {
-        label: "View Class 12 Certificate ↗",
-        url: "#",
+        label: "View Class 12 Certificate",
+        url: "/documents/education/class-12-certificate.pdf",
       },
     ],
   },

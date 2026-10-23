@@ -20,15 +20,15 @@ function Education() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Heading */}
         <Reveal>
-        <div className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
-            Education
-          </p>
+          <div className="mb-12">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
+              Education
+            </p>
 
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-100">
-            My academic journey.
-          </h2>
-        </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-100">
+              My academic journey.
+            </h2>
+          </div>
         </Reveal>
         {/* Education List */}
         <div className="space-y-6">
@@ -75,15 +75,18 @@ function Education() {
                 </div>
 
                 {/* Actions */}
-                {education.actions && (
+                {education.actions?.length > 0 && (
                   <div className="flex flex-wrap gap-4 lg:pt-1">
                     {education.actions.map((action) => (
                       <a
-                        key={action.label}
+                        key={`${action.label}-${action.url}`}
                         href={action.url}
-                        className="inline-flex text-sm text-zinc-400 transition-colors hover:text-zinc-100"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm text-zinc-400 transition-colors hover:text-zinc-100"
                       >
                         {action.label}
+                        <span aria-hidden="true">↗</span>
                       </a>
                     ))}
                   </div>
